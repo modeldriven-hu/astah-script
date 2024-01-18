@@ -1,8 +1,8 @@
 package hu.modeldriven.astah.script.ui.event;
 
-import hu.modeldriven.astah.script.common.eventbus.Event;
-
 import java.util.List;
+
+import hu.modeldriven.core.eventbus.Event;
 
 public class ListResultCreatedEvent implements Event {
 

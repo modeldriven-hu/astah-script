@@ -15,7 +15,7 @@ public class GroovyScriptExecutionException extends ScriptExecutionException {
     }
 
     private static int calculateLineNumberFromException(Exception ex) {
-        var lineNumber = MISSING_LINE;
+        int lineNumber = MISSING_LINE;
 
         if (ex instanceof MultipleCompilationErrorsException) {
             Pattern pattern = Pattern.compile("@ line ([0-9]+)");

@@ -1,14 +1,17 @@
 package hu.modeldriven.astah.script.ui.usecase;
 
-import hu.modeldriven.astah.script.common.eventbus.EventBus;
 import hu.modeldriven.astah.script.common.ui.TabularResultTableModel;
-import hu.modeldriven.astah.script.common.usecase.UseCase;
 import hu.modeldriven.astah.script.ui.event.ResultGridFocusRequestedEvent;
 import hu.modeldriven.astah.script.ui.event.TabularResultCreatedEvent;
+import hu.modeldriven.core.eventbus.EventHandler;
+import hu.modeldriven.core.eventbus.Event;
+import hu.modeldriven.core.eventbus.EventBus;
 
 import javax.swing.*;
+import java.util.Collections;
+import java.util.List;
 
-public class DisplayTabularResultInTableUseCase implements UseCase {
+public class DisplayTabularResultInTableUseCase implements EventHandler<TabularResultCreatedEvent> {
 
     private final EventBus eventBus;
     private final JTable table;
@@ -16,11 +19,10 @@ public class DisplayTabularResultInTableUseCase implements UseCase {
     public DisplayTabularResultInTableUseCase(EventBus eventBus, JTable table) {
         this.eventBus = eventBus;
         this.table = table;
-        eventBus.subscribe(TabularResultCreatedEvent.class, this::onTabularResultCreated);
     }
 
-    private void onTabularResultCreated(TabularResultCreatedEvent event) {
-
+    @Override
+    public void handleEvent(TabularResultCreatedEvent event) {
         eventBus.publish(new ResultGridFocusRequestedEvent());
 
         SwingUtilities.invokeLater(() -> {
@@ -31,5 +33,8 @@ public class DisplayTabularResultInTableUseCase implements UseCase {
         });
     }
 
-
+    @Override
+    public List<Class<? extends Event>> subscribedEvents() {
+        return Collections.singletonList(TabularResultCreatedEvent.class);
+    }
 }

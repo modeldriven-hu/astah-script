@@ -1,6 +1,7 @@
-package hu.modeldriven.astah.script.common.eventbus;
+package hu.modeldriven.core.eventbus;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -12,7 +13,7 @@ public class EventBus {
 
     @SuppressWarnings("unchecked")
     public void publish(Event event) {
-        for (var entry : subscriptions.entrySet()) {
+        for (Map.Entry<Class<? extends Event>, Set<EventHandler<? extends Event>>> entry : subscriptions.entrySet()) {
             if (entry.getKey().equals(event.getClass())) {
                 for (EventHandler handler : entry.getValue()) {
                     handler.handleEvent(event);
@@ -27,15 +28,12 @@ public class EventBus {
         subscriptions.get(eventClass).add(eventHandler);
     }
 
-    public <T extends Event> void unsubscribe(EventHandler<T> eventHandler) {
-        for (var entry : subscriptions.entrySet()) {
-            entry.getValue().remove(eventHandler);
-        }
-    }
+    public <T extends Event> void subscribe(EventHandler<T> eventHandler) {
+        List<Class<? extends Event>> subscribedEvents = eventHandler.subscribedEvents();
 
-    public void unsubscribeAll() {
-        for (var entry : subscriptions.entrySet()) {
-            entry.getValue().clear();
+        for (Class<? extends Event> eventClass : subscribedEvents) {
+            subscriptions.computeIfAbsent(eventClass, k -> new HashSet<>());
+            subscriptions.get(eventClass).add(eventHandler);
         }
     }
 

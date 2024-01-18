@@ -1,18 +1,20 @@
 package hu.modeldriven.astah.script.ui.usecase;
 
-import hu.modeldriven.astah.script.common.eventbus.EventBus;
 import hu.modeldriven.astah.script.common.result.CastedList;
 import hu.modeldriven.astah.script.common.result.ListResult;
 import hu.modeldriven.astah.script.common.result.TabularResult;
 import hu.modeldriven.astah.script.common.script.ExecutorNotFoundException;
 import hu.modeldriven.astah.script.common.script.ScriptExecutionException;
 import hu.modeldriven.astah.script.common.script.ScriptExecutor;
-import hu.modeldriven.astah.script.common.usecase.UseCase;
 import hu.modeldriven.astah.script.ui.event.*;
+import hu.modeldriven.core.eventbus.Event;
+import hu.modeldriven.core.eventbus.EventBus;
+import hu.modeldriven.core.eventbus.EventHandler;
 
+import java.util.Collections;
 import java.util.List;
 
-public class ExecuteSelectedScriptUseCase implements UseCase {
+public class ExecuteSelectedScriptUseCase implements EventHandler<ScriptExecutionRequestedEvent> {
 
     private final EventBus eventBus;
     private final List<ScriptExecutor> executors;
@@ -20,11 +22,12 @@ public class ExecuteSelectedScriptUseCase implements UseCase {
     public ExecuteSelectedScriptUseCase(EventBus eventBus, List<ScriptExecutor> executors) {
         this.eventBus = eventBus;
         this.executors = executors;
-        eventBus.subscribe(ScriptExecutionRequestedEvent.class, this::onScriptExecutionRequested);
     }
 
-    private void onScriptExecutionRequested(ScriptExecutionRequestedEvent event) {
-        try {
+
+    @Override
+    public void handleEvent(ScriptExecutionRequestedEvent event) {
+       try {
 
             String language = event.getLanguage();
 
@@ -61,4 +64,9 @@ public class ExecuteSelectedScriptUseCase implements UseCase {
         return array != null && (array.getClass().isArray());
     }
 
+
+    @Override
+    public List<Class<? extends Event>> subscribedEvents() {
+        return Collections.singletonList(ScriptExecutionRequestedEvent.class);
+    }
 }

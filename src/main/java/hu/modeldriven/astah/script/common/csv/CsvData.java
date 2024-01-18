@@ -18,7 +18,7 @@ public class CsvData {
 
     public List<String[]> asRawData() {
         Stream<String[]> headerStream = Arrays.asList(
-                new String[][]{result.getFields().values().toArray(String[]::new)}
+                new String[][]{result.getFields().values().toArray(new String[0])}
         ).stream();
 
         Stream<String[]> dataStream =

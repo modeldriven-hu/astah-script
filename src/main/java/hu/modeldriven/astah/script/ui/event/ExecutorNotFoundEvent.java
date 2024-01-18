@@ -1,7 +1,7 @@
 package hu.modeldriven.astah.script.ui.event;
 
-import hu.modeldriven.astah.script.common.eventbus.Event;
 import hu.modeldriven.astah.script.common.script.ExecutorNotFoundException;
+import hu.modeldriven.core.eventbus.Event;
 
 public class ExecutorNotFoundEvent implements Event {
 

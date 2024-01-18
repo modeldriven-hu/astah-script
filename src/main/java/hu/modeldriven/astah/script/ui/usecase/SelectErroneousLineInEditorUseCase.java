@@ -1,15 +1,18 @@
 package hu.modeldriven.astah.script.ui.usecase;
 
-import hu.modeldriven.astah.script.common.eventbus.EventBus;
-import hu.modeldriven.astah.script.common.usecase.UseCase;
 import hu.modeldriven.astah.script.ui.event.ExceptionOccurredEvent;
 import hu.modeldriven.astah.script.ui.event.ScriptExecutionFailedEvent;
+import hu.modeldriven.core.eventbus.Event;
+import hu.modeldriven.core.eventbus.EventBus;
+import hu.modeldriven.core.eventbus.EventHandler;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
+import java.util.Collections;
+import java.util.List;
 
-public class SelectErroneousLineInEditorUseCase implements UseCase {
+public class SelectErroneousLineInEditorUseCase implements EventHandler<ScriptExecutionFailedEvent> {
 
     private final EventBus eventBus;
     private final RSyntaxTextArea textArea;
@@ -17,10 +20,10 @@ public class SelectErroneousLineInEditorUseCase implements UseCase {
     public SelectErroneousLineInEditorUseCase(EventBus eventBus, RSyntaxTextArea textArea) {
         this.eventBus = eventBus;
         this.textArea = textArea;
-        eventBus.subscribe(ScriptExecutionFailedEvent.class, this::onScriptExecutionFailed);
     }
 
-    public void onScriptExecutionFailed(ScriptExecutionFailedEvent event) {
+    @Override
+    public void handleEvent(ScriptExecutionFailedEvent event) {
         SwingUtilities.invokeLater(() -> {
 
             try {
@@ -38,4 +41,8 @@ public class SelectErroneousLineInEditorUseCase implements UseCase {
         });
     }
 
+    @Override
+    public List<Class<? extends Event>> subscribedEvents() {
+        return Collections.singletonList(ScriptExecutionFailedEvent.class);
+    }
 }

@@ -1,14 +1,17 @@
 package hu.modeldriven.astah.script.ui.usecase;
 
-import hu.modeldriven.astah.script.common.eventbus.EventBus;
 import hu.modeldriven.astah.script.common.ui.SimpleListTableModel;
-import hu.modeldriven.astah.script.common.usecase.UseCase;
 import hu.modeldriven.astah.script.ui.event.ListResultCreatedEvent;
 import hu.modeldriven.astah.script.ui.event.ResultGridFocusRequestedEvent;
+import hu.modeldriven.core.eventbus.Event;
+import hu.modeldriven.core.eventbus.EventBus;
+import hu.modeldriven.core.eventbus.EventHandler;
 
 import javax.swing.*;
+import java.util.Collections;
+import java.util.List;
 
-public class DisplayListResultInTableUseCase implements UseCase {
+public class DisplayListResultInTableUseCase implements EventHandler<ListResultCreatedEvent> {
 
     private final EventBus eventBus;
     private final JTable table;
@@ -16,11 +19,10 @@ public class DisplayListResultInTableUseCase implements UseCase {
     public DisplayListResultInTableUseCase(EventBus eventBus, JTable table) {
         this.eventBus = eventBus;
         this.table = table;
-        eventBus.subscribe(ListResultCreatedEvent.class, this::onListResultCreated);
     }
 
-    void onListResultCreated(ListResultCreatedEvent event) {
-
+    @Override
+    public void handleEvent(ListResultCreatedEvent event) {
         eventBus.publish(new ResultGridFocusRequestedEvent());
 
         SwingUtilities.invokeLater(() -> {
@@ -33,4 +35,8 @@ public class DisplayListResultInTableUseCase implements UseCase {
         });
     }
 
+    @Override
+    public List<Class<? extends Event>> subscribedEvents() {
+        return Collections.singletonList(ListResultCreatedEvent.class);
+    }
 }

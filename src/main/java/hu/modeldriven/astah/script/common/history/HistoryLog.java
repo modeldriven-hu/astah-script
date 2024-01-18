@@ -3,9 +3,9 @@ package hu.modeldriven.astah.script.common.history;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
-import hu.modeldriven.astah.script.common.eventbus.EventBus;
 import hu.modeldriven.astah.script.common.storage.LocalStorage;
 import hu.modeldriven.astah.script.ui.event.ExceptionOccurredEvent;
+import hu.modeldriven.core.eventbus.EventBus;
 
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -1,17 +1,18 @@
 package hu.modeldriven.astah.script.ui.usecase;
 
-import hu.modeldriven.astah.script.common.eventbus.EventBus;
 import hu.modeldriven.astah.script.common.history.HistoryLog;
 import hu.modeldriven.astah.script.common.history.HistoryRecord;
-import hu.modeldriven.astah.script.common.usecase.UseCase;
 import hu.modeldriven.astah.script.ui.event.DialogDisplayedEvent;
 import hu.modeldriven.astah.script.ui.event.ExceptionOccurredEvent;
+import hu.modeldriven.core.eventbus.Event;
+import hu.modeldriven.core.eventbus.EventBus;
+import hu.modeldriven.core.eventbus.EventHandler;
 
 import javax.swing.*;
+import java.util.Collections;
 import java.util.List;
 
-@SuppressWarnings({"squid:S3740"})
-public class LoadHistoryOnDialogDisplayUseCase implements UseCase {
+public class LoadHistoryOnDialogDisplayUseCase implements EventHandler<DialogDisplayedEvent> {
 
     private final EventBus eventBus;
     private final JComboBox comboBox;
@@ -21,16 +22,15 @@ public class LoadHistoryOnDialogDisplayUseCase implements UseCase {
         this.eventBus = eventBus;
         this.comboBox = comboBox;
         this.historyLog = historyLog;
-        eventBus.subscribe(DialogDisplayedEvent.class, this::onDialogDisplayed);
     }
 
-    @SuppressWarnings("unchecked")
-    private void onDialogDisplayed(DialogDisplayedEvent event) {
-
+    @Override
+    public void handleEvent(DialogDisplayedEvent event) {
         SwingUtilities.invokeLater(() -> {
             try {
                 List<HistoryRecord> log = historyLog.read();
-                DefaultComboBoxModel model = new DefaultComboBoxModel<>(log.toArray(HistoryRecord[]::new));
+
+                DefaultComboBoxModel model = new DefaultComboBoxModel<>(log.toArray(new HistoryRecord[0]));
                 this.comboBox.setModel(model);
             } catch (Exception e) {
                 eventBus.publish(new ExceptionOccurredEvent(e));
@@ -38,4 +38,8 @@ public class LoadHistoryOnDialogDisplayUseCase implements UseCase {
         });
     }
 
+    @Override
+    public List<Class<? extends Event>> subscribedEvents() {
+        return Collections.singletonList(DialogDisplayedEvent.class);
+    }
 }

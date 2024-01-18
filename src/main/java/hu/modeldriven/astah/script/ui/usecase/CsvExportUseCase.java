@@ -3,19 +3,21 @@ package hu.modeldriven.astah.script.ui.usecase;
 import com.opencsv.CSVWriterBuilder;
 import com.opencsv.ICSVWriter;
 import hu.modeldriven.astah.script.common.csv.CsvData;
-import hu.modeldriven.astah.script.common.eventbus.EventBus;
 import hu.modeldriven.astah.script.common.result.TabularResult;
-import hu.modeldriven.astah.script.common.usecase.UseCase;
 import hu.modeldriven.astah.script.ui.event.ExceptionOccurredEvent;
 import hu.modeldriven.astah.script.ui.event.ExportFileSelectedEvent;
 import hu.modeldriven.astah.script.ui.event.TabularResultCreatedEvent;
+import hu.modeldriven.core.eventbus.Event;
+import hu.modeldriven.core.eventbus.EventBus;
+import hu.modeldriven.core.eventbus.EventHandler;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class CsvExportUseCase implements UseCase {
+public class CsvExportUseCase implements EventHandler<Event> {
 
     private final EventBus eventBus;
 
@@ -23,8 +25,18 @@ public class CsvExportUseCase implements UseCase {
 
     public CsvExportUseCase(EventBus eventBus) {
         this.eventBus = eventBus;
-        eventBus.subscribe(TabularResultCreatedEvent.class, this::onSmartGridResultCreated);
-        eventBus.subscribe(ExportFileSelectedEvent.class, this::onExportFileSelect);
+    }
+
+    @Override
+    public void handleEvent(Event event) {
+
+        if (event instanceof TabularResultCreatedEvent){
+            onSmartGridResultCreated((TabularResultCreatedEvent)event);
+        }
+
+        if (event instanceof ExportFileSelectedEvent){
+            onExportFileSelect((ExportFileSelectedEvent)event);
+        }
     }
 
     public void onSmartGridResultCreated(TabularResultCreatedEvent event) {
@@ -42,4 +54,8 @@ public class CsvExportUseCase implements UseCase {
         });
     }
 
+    @Override
+    public List<Class<? extends Event>> subscribedEvents() {
+        return Arrays.asList(TabularResultCreatedEvent.class, ExportFileSelectedEvent.class);
+    }
 }
