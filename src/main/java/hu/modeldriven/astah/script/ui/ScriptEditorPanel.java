@@ -4,7 +4,6 @@ import hu.modeldriven.astah.script.common.history.HistoryComboBoxRenderer;
 import hu.modeldriven.astah.script.common.history.HistoryLog;
 import hu.modeldriven.astah.script.common.history.HistoryRecord;
 import hu.modeldriven.astah.script.common.script.GroovyScriptExecutor;
-import hu.modeldriven.astah.script.common.script.JythonScriptExecutor;
 import hu.modeldriven.astah.script.common.script.ScriptExecutor;
 import hu.modeldriven.astah.script.common.storage.LocalStorage;
 import hu.modeldriven.astah.script.common.ui.KeyPressedForwarder;
@@ -31,7 +30,7 @@ public class ScriptEditorPanel extends BaseScriptEditorPanel {
         super();
         this.eventBus = eventBus;
         this.historyLog = new HistoryLog(eventBus, new LocalStorage());
-        this.executors = Arrays.asList(new GroovyScriptExecutor(), new JythonScriptExecutor());
+        this.executors = Arrays.asList(new GroovyScriptExecutor());
 
         this.updateComponents();
     }
