@@ -14,6 +14,15 @@ This enables you to use Groovy language scripting for Astah.
 * History support
 * Filter result
 
+# Screenshot
+
+![image](https://github.com/modeldriven-hu/astah-script/assets/8182138/8f1489f6-9859-4e51-abd3-616782d469f9)
+
+# Why a new script editor?
+
+Astah has a built in script editor, but by default it is not supporting the groovy language. I wrote a script editor in the past for Visual Paradigm that
+totally lacked scripting capability, and could do a migration in half-a-day.
+
 # How to write scripts in Groovy?
 
 ## Overview
