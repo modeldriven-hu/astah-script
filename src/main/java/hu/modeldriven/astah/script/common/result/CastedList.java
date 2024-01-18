@@ -1,9 +1,6 @@
 package hu.modeldriven.astah.script.common.result;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class CastedList {
 
@@ -14,7 +11,7 @@ public class CastedList {
     }
 
     public static Optional<CastedList> of(Object obj) {
-        if (obj != null && (isArray(obj) || isIterable(obj))) {
+        if ((isArray(obj) || isIterable(obj))) {
             return Optional.of(new CastedList(obj));
         }
 
@@ -36,35 +33,35 @@ public class CastedList {
         }
 
         if (obj instanceof boolean[]) {
-            return Arrays.asList(obj);
+            return Collections.singletonList(obj);
         }
 
         if (obj instanceof byte[]) {
-            return Arrays.asList(obj);
+            return Collections.singletonList(obj);
         }
 
         if (obj instanceof short[]) {
-            return Arrays.asList(obj);
+            return Collections.singletonList(obj);
         }
 
         if (obj instanceof char[]) {
-            return Arrays.asList(obj);
+            return Collections.singletonList(obj);
         }
 
         if (obj instanceof int[]) {
-            return Arrays.asList(obj);
+            return Collections.singletonList(obj);
         }
 
         if (obj instanceof long[]) {
-            return Arrays.asList(obj);
+            return Collections.singletonList(obj);
         }
 
         if (obj instanceof float[]) {
-            return Arrays.asList(obj);
+            return Collections.singletonList(obj);
         }
 
         if (obj instanceof double[]) {
-            return Arrays.asList(obj);
+            return Collections.singletonList(obj);
         }
 
         if (obj instanceof Iterable) {
@@ -74,6 +71,6 @@ public class CastedList {
             return retValue;
         }
 
-        return Arrays.asList("<<Array type not supported [" + obj.getClass().getComponentType().getName() + "]>>");
+        return Collections.singletonList("<<Array type not supported [" + obj.getClass().getComponentType().getName() + "]>>");
     }
 }

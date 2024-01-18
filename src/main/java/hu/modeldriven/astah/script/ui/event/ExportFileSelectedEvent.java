@@ -1,8 +1,8 @@
 package hu.modeldriven.astah.script.ui.event;
 
-import java.io.File;
-
 import hu.modeldriven.core.eventbus.Event;
+
+import java.io.File;
 
 public class ExportFileSelectedEvent implements Event {
 

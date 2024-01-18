@@ -3,8 +3,8 @@ package hu.modeldriven.astah.script.ui.usecase;
 import hu.modeldriven.astah.script.ui.event.ResultTextareaFocusRequestedEvent;
 import hu.modeldriven.astah.script.ui.event.ScriptExecutionFailedEvent;
 import hu.modeldriven.core.eventbus.Event;
-import hu.modeldriven.core.eventbus.EventHandler;
 import hu.modeldriven.core.eventbus.EventBus;
+import hu.modeldriven.core.eventbus.EventHandler;
 
 import javax.swing.*;
 import java.util.Collections;

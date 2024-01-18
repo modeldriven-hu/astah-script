@@ -24,10 +24,9 @@ public class ExecuteSelectedScriptUseCase implements EventHandler<ScriptExecutio
         this.executors = executors;
     }
 
-
     @Override
     public void handleEvent(ScriptExecutionRequestedEvent event) {
-       try {
+        try {
 
             String language = event.getLanguage();
 

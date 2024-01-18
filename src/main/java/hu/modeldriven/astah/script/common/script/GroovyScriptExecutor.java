@@ -1,5 +1,6 @@
 package hu.modeldriven.astah.script.common.script;
 
+import com.change_vision.jude.api.inf.AstahAPI;
 import groovy.lang.Binding;
 import groovy.lang.GroovyShell;
 
@@ -13,15 +14,19 @@ public class GroovyScriptExecutor implements ScriptExecutor {
     @Override
     public Object execute(String script) throws ScriptExecutionException {
 
-        Binding binding = new Binding();
-        binding.setVariable("modelHelper", new ModelHelper());
-        GroovyShell shell = new GroovyShell(binding);
-
         try {
+            AstahAPI api = AstahAPI.getAstahAPI();
+
+            Binding binding = new Binding();
+            binding.setVariable("api", api);
+            binding.setVariable("modelHelper", new ModelHelper());
+            GroovyShell shell = new GroovyShell(binding);
+
             return shell.evaluate(script);
         } catch (Exception ex) {
             throw new GroovyScriptExecutionException(ex);
         }
     }
+
 
 }

@@ -3,9 +3,9 @@ package hu.modeldriven.astah.script.ui.usecase;
 import hu.modeldriven.astah.script.common.ui.TabularResultTableModel;
 import hu.modeldriven.astah.script.ui.event.ResultGridFocusRequestedEvent;
 import hu.modeldriven.astah.script.ui.event.TabularResultCreatedEvent;
-import hu.modeldriven.core.eventbus.EventHandler;
 import hu.modeldriven.core.eventbus.Event;
 import hu.modeldriven.core.eventbus.EventBus;
+import hu.modeldriven.core.eventbus.EventHandler;
 
 import javax.swing.*;
 import java.util.Collections;

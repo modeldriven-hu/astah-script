@@ -13,7 +13,7 @@
          <action
 			   label="%menu_label"
                icon="icons/sample.gif"
-               class="hu.modeldriven.astah.script.TemplateAction"
+               class="hu.modeldriven.astah.script.ShowScriptEditorAction"
                tooltip="%menu_tooltip"
                menubarPath="tool/astah-script/"
                id="astah-script">

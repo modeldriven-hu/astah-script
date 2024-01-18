@@ -13,10 +13,12 @@ import hu.modeldriven.core.eventbus.EventBus;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 
 import javax.swing.*;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @SuppressWarnings({"squid:S1068", "squid:S1948"})
@@ -30,9 +32,10 @@ public class ScriptEditorPanel extends BaseScriptEditorPanel {
         super();
         this.eventBus = eventBus;
         this.historyLog = new HistoryLog(eventBus, new LocalStorage());
-        this.executors = Arrays.asList(new GroovyScriptExecutor());
+        this.executors = Collections.singletonList(new GroovyScriptExecutor());
 
         this.updateComponents();
+        this.initUseCases();
     }
 
     private void initUseCases() {
@@ -57,65 +60,66 @@ public class ScriptEditorPanel extends BaseScriptEditorPanel {
         eventBus.subscribe(new SelectErroneousLineInEditorUseCase(eventBus, this.scriptTextArea));
 
         eventBus.publish(new DialogDisplayedEvent());
-}
-
-private void updateComponents() {
-
-    this.scriptTextArea.setCodeFoldingEnabled(true);
-    this.scriptTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_GROOVY);
-    this.scriptTextArea.setAntiAliasingEnabled(true);
-
-    this.scriptTextScrollPane.setLineNumbersEnabled(true);
-
-    for (ScriptExecutor executor : this.executors) {
-        this.languageComboBox.addItem(executor.getLanguage());
     }
 
-    this.historyComboBox.setRenderer(new HistoryComboBoxRenderer());
+    private void updateComponents() {
 
-    this.tableFilterTextField.addKeyListener(new KeyPressedForwarder(this::filterTableCommand));
-    this.historyComboBox.addItemListener(this::selectHistoryCommand);
-    this.appendToHistoryButton.addActionListener(this::appendToHistoryCommand);
-    this.closeButton.addActionListener(this::closeDialogCommand);
-    this.executeButton.addActionListener(this::executeScriptCommand);
-    this.exportButton.addActionListener(this::exportCsvCommand);
-}
+        this.scriptTextArea.setCodeFoldingEnabled(true);
+        this.scriptTextArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_GROOVY);
+        this.scriptTextArea.setAntiAliasingEnabled(true);
+        this.scriptTextArea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 14));
 
-private void filterTableCommand(KeyEvent e) {
-    if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+        this.scriptTextScrollPane.setLineNumbersEnabled(true);
 
-        if (tableFilterTextField.getText().equals("")) {
-            eventBus.publish(new ClearFilterRequestedEvent());
-        } else {
-            eventBus.publish(new FilterRequestedEvent(tableFilterTextField.getText()));
+        for (ScriptExecutor executor : this.executors) {
+            this.languageComboBox.addItem(executor.getLanguage());
+        }
+
+        this.historyComboBox.setRenderer(new HistoryComboBoxRenderer());
+
+        this.tableFilterTextField.addKeyListener(new KeyPressedForwarder(this::filterTableCommand));
+        this.historyComboBox.addItemListener(this::selectHistoryCommand);
+        this.appendToHistoryButton.addActionListener(this::appendToHistoryCommand);
+        this.closeButton.addActionListener(this::closeDialogCommand);
+        this.executeButton.addActionListener(this::executeScriptCommand);
+        this.exportButton.addActionListener(this::exportCsvCommand);
+    }
+
+    private void filterTableCommand(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+
+            if (tableFilterTextField.getText().equals("")) {
+                eventBus.publish(new ClearFilterRequestedEvent());
+            } else {
+                eventBus.publish(new FilterRequestedEvent(tableFilterTextField.getText()));
+            }
         }
     }
-}
 
-private void selectHistoryCommand(ItemEvent e) {
-    if (e.getStateChange() == ItemEvent.SELECTED) {
-        eventBus.publish(new HistoryRecordSelectedEvent((HistoryRecord) e.getItem()));
+    private void selectHistoryCommand(ItemEvent e) {
+        if (e.getStateChange() == ItemEvent.SELECTED) {
+            eventBus.publish(new HistoryRecordSelectedEvent((HistoryRecord) e.getItem()));
+        }
     }
-}
 
-private void appendToHistoryCommand(ActionEvent e) {
-    eventBus.publish(new AppendScriptToHistoryRequestedEvent());
-}
-
-private void closeDialogCommand(ActionEvent e) {
-    eventBus.publish(new CloseDialogRequestedEvent());
-}
-
-private void executeScriptCommand(ActionEvent e) {
-    eventBus.publish(new ScriptExecutionRequestedEvent(languageComboBox.getSelectedItem().toString(), scriptTextArea.getText()));
-}
-
-private void exportCsvCommand(ActionEvent e) {
-    JFileChooser fileChooser = new JFileChooser();
-
-    if (JFileChooser.APPROVE_OPTION == fileChooser.showSaveDialog(null)) {
-        eventBus.publish(new ExportFileSelectedEvent(fileChooser.getSelectedFile()));
+    private void appendToHistoryCommand(ActionEvent e) {
+        eventBus.publish(new AppendScriptToHistoryRequestedEvent());
     }
-}
+
+    private void closeDialogCommand(ActionEvent e) {
+        eventBus.publish(new CloseDialogRequestedEvent());
+    }
+
+    private void executeScriptCommand(ActionEvent e) {
+        eventBus.publish(new ScriptExecutionRequestedEvent(languageComboBox.getSelectedItem().toString(), scriptTextArea.getText()));
+    }
+
+    private void exportCsvCommand(ActionEvent e) {
+        JFileChooser fileChooser = new JFileChooser();
+
+        if (JFileChooser.APPROVE_OPTION == fileChooser.showSaveDialog(null)) {
+            eventBus.publish(new ExportFileSelectedEvent(fileChooser.getSelectedFile()));
+        }
+    }
 
 }

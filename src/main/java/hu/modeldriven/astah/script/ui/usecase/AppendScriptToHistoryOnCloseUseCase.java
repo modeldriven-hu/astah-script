@@ -1,19 +1,17 @@
 package hu.modeldriven.astah.script.ui.usecase;
 
-import java.util.Collections;
-import java.util.List;
-
-import javax.swing.JComboBox;
-
-import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
-
 import hu.modeldriven.astah.script.common.history.HistoryLog;
 import hu.modeldriven.astah.script.ui.event.CloseDialogRequestedEvent;
 import hu.modeldriven.core.eventbus.Event;
 import hu.modeldriven.core.eventbus.EventBus;
 import hu.modeldriven.core.eventbus.EventHandler;
+import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 
-public class AppendScriptToHistoryOnCloseUseCase implements EventHandler<CloseDialogRequestedEvent>{
+import javax.swing.*;
+import java.util.Collections;
+import java.util.List;
+
+public class AppendScriptToHistoryOnCloseUseCase implements EventHandler<CloseDialogRequestedEvent> {
 
     private final HistoryLog historyLog;
     private final JComboBox<String> comboBox;
@@ -25,14 +23,14 @@ public class AppendScriptToHistoryOnCloseUseCase implements EventHandler<CloseDi
         this.historyLog = historyLog;
     }
 
-	@Override
-	public void handleEvent(CloseDialogRequestedEvent event) {
-        historyLog.append(comboBox.getSelectedItem().toString(), textArea.getText());		
-	}
+    @Override
+    public void handleEvent(CloseDialogRequestedEvent event) {
+        historyLog.append(comboBox.getSelectedItem().toString(), textArea.getText());
+    }
 
-	@Override
-	public List<Class<? extends Event>> subscribedEvents() {
-		return Collections.singletonList(CloseDialogRequestedEvent.class);
-	}
+    @Override
+    public List<Class<? extends Event>> subscribedEvents() {
+        return Collections.singletonList(CloseDialogRequestedEvent.class);
+    }
 
 }

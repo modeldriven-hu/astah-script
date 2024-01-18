@@ -19,6 +19,7 @@ public class DisplayStringResultInOutputTextAreaUseCase implements EventHandler<
         this.eventBus = eventBus;
         this.textArea = textArea;
     }
+
     @Override
     public void handleEvent(StringResultCreatedEvent event) {
         eventBus.publish(new ResultTextareaFocusRequestedEvent());

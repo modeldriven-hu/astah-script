@@ -30,12 +30,12 @@ public class CsvExportUseCase implements EventHandler<Event> {
     @Override
     public void handleEvent(Event event) {
 
-        if (event instanceof TabularResultCreatedEvent){
-            onSmartGridResultCreated((TabularResultCreatedEvent)event);
+        if (event instanceof TabularResultCreatedEvent) {
+            onSmartGridResultCreated((TabularResultCreatedEvent) event);
         }
 
-        if (event instanceof ExportFileSelectedEvent){
-            onExportFileSelect((ExportFileSelectedEvent)event);
+        if (event instanceof ExportFileSelectedEvent) {
+            onExportFileSelect((ExportFileSelectedEvent) event);
         }
     }
 
