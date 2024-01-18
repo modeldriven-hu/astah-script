@@ -1,0 +1,18 @@
+package hu.modeldriven.astah.script.ui.event;
+
+import hu.modeldriven.astah.script.common.eventbus.Event;
+import hu.modeldriven.astah.script.common.result.TabularResult;
+
+public class TabularResultCreatedEvent implements Event {
+
+    TabularResult result;
+
+    public TabularResultCreatedEvent(TabularResult result) {
+        this.result = result;
+    }
+
+    public TabularResult getTabularResult() {
+        return result;
+    }
+
+}

@@ -10,7 +10,7 @@
 		<astah.path>/usr/lib/astah_sysml</astah.path>
 		<junit-jupiter-engine.version>5.4.0</junit-jupiter-engine.version>
 		<hamcrest-all.version>1.3</hamcrest-all.version>
-		<groovy.version>3.0.9</groovy.version>
+		<groovy.version>4.0.16</groovy.version>
 		<rsyntaxtextarea.version>3.1.4</rsyntaxtextarea.version>
 		<commons-beanutils.version>1.9.4</commons-beanutils.version>
 		<opencsv.version>5.5.2</opencsv.version>
@@ -269,10 +269,9 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.codehaus.groovy</groupId>
-			<artifactId>groovy-all</artifactId>
+			<groupId>org.apache.groovy</groupId>
+			<artifactId>groovy</artifactId>
 			<version>${groovy.version}</version>
-			<type>pom</type>
 		</dependency>
 		<dependency>
 			<groupId>com.fifesoft</groupId>
