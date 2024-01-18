@@ -8,4 +8,10 @@ import com.change_vision.jude.api.inf.model.IClass;
 def accessor = api.getProjectAccessor();
 def classes = accessor.findElements(IClass.class);
 
-classes[0].name
+def list = []
+
+for (def clazz in classes){
+list << clazz.name
+}
+
+list

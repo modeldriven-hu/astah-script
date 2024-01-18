@@ -19,7 +19,7 @@ public class GroovyScriptExecutor implements ScriptExecutor {
 
             Binding binding = new Binding();
             binding.setVariable("api", api);
-            binding.setVariable("modelHelper", new ModelHelper());
+            binding.setVariable("helper", new ScriptHelper());
             GroovyShell shell = new GroovyShell(binding);
 
             return shell.evaluate(script);
