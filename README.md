@@ -74,6 +74,33 @@ return helper.tabularResult(
 )
 ```
 
+## Modification of the model
+
+The model can be modified using the standard API as follows:
+
+```
+import com.change_vision.jude.api.inf.model.IClass
+
+def accessor = api.getProjectAccessor()
+def classes = accessor.findElements(IClass.class)
+
+
+def transactionManager = accessor.getTransactionManager()
+
+try {
+       transactionManager.beginTransaction()
+
+	 classes[0].setDefinition("Hello world from script")
+       
+       transactionManager.endTransaction()
+
+} catch (Exception e) {
+	transactionManager.abortTransaction()
+}
+
+"Done"
+```
+
 # How to display results?
 
 In order to display the result of the script it has to return the data to be displayed. There are various ways of it.
