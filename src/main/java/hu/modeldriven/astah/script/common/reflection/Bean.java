@@ -6,12 +6,12 @@ public class Bean {
 
     private final Object obj;
 
-    public static Bean of(Object obj) {
-        return new Bean(obj);
-    }
-
     private Bean(Object obj) {
         this.obj = obj;
+    }
+
+    public static Bean of(Object obj) {
+        return new Bean(obj);
     }
 
     public Object property(String key) {
