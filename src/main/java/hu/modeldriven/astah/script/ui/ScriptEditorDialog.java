@@ -16,12 +16,17 @@ public class ScriptEditorDialog extends JDialog implements EventHandler<CloseDia
 
     public ScriptEditorDialog(Frame parent) {
         super(parent, "Script editor", false);
+        setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 
         this.eventBus = new EventBus();
         eventBus.subscribe(this);
 
         this.setContentPane(new ScriptEditorPanel(eventBus));
         this.pack();
+    }
+
+    public void display() {
+        this.setVisible(true);
     }
 
     @Override
