@@ -4,6 +4,11 @@
  */
 package hu.modeldriven.astah.script.ui;
 
+import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
+
+import javax.swing.*;
+import javax.swing.text.JTextComponent;
+
 /**
  * @author zsolt
  */
@@ -34,7 +39,14 @@ public class BaseScriptEditorPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         executeButton = new javax.swing.JButton();
         scriptTextScrollPane = new org.fife.ui.rtextarea.RTextScrollPane();
+
+        JTextComponent.removeKeymap("RTextAreaKeymap");
         scriptTextArea = new org.fife.ui.rsyntaxtextarea.RSyntaxTextArea();
+        UIManager.put("RSyntaxTextAreaUI.actionMap", null);
+        UIManager.put("RSyntaxTextAreaUI.inputMap", null);
+        UIManager.put("RTextAreaUI.actionMap", null);
+        UIManager.put("RTextAreaUI.inputMap", null);
+
         helpButton = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         historyComboBox = new javax.swing.JComboBox<>();
