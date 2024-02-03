@@ -7,13 +7,15 @@ import hu.modeldriven.astah.script.ui.ScriptEditorDialog;
 
 public class ShowScriptEditorAction implements IPluginActionDelegate {
 
-    public Object run(IWindow window) throws UnExpectedException {
+    private final ScriptEditorDialog dialog;
 
-        ScriptEditorDialog dialog = new ScriptEditorDialog(null);
-        dialog.setVisible(true);
-
-        return null;
+    public ShowScriptEditorAction() {
+        dialog = new ScriptEditorDialog(null);
     }
 
+    public Object run(IWindow window) {
+        dialog.display();
+        return null;
+    }
 
 }

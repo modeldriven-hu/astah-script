@@ -15,6 +15,33 @@ import javax.swing.text.JTextComponent;
 @SuppressWarnings({"squid:S1604", "squid:SS1172", "squid:S1450", "squid:S1172", "squid:S1135"})
 public class BaseScriptEditorPanel extends javax.swing.JPanel {
 
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    protected javax.swing.JButton appendToHistoryButton;
+    protected javax.swing.JButton closeButton;
+    protected javax.swing.JButton executeButton;
+    protected javax.swing.JButton exportButton;
+    protected javax.swing.JButton helpButton;
+    protected javax.swing.JComboBox<String> historyComboBox;
+    protected javax.swing.JComboBox<String> languageComboBox;
+    protected javax.swing.JTable outputTable;
+    protected javax.swing.JTextArea outputTextArea;
+    protected javax.swing.JTabbedPane resultTabbedPane;
+    protected org.fife.ui.rsyntaxtextarea.RSyntaxTextArea scriptTextArea;
+    protected org.fife.ui.rtextarea.RTextScrollPane scriptTextScrollPane;
+    protected javax.swing.JTextField tableFilterTextField;
+    protected javax.swing.JPanel textualResultPanel;
+    private javax.swing.JPanel bottomPanel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JPanel resultPanel;
+    private javax.swing.JPanel scriptPanel;
+    private javax.swing.JSplitPane splitPanel;
+    private javax.swing.JPanel tableResultPanel;
+    private javax.swing.JPanel topPanel;
     /**
      * Creates new form MyScriptEditorPanel
      */
@@ -303,34 +330,5 @@ public class BaseScriptEditorPanel extends javax.swing.JPanel {
     private void historyComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historyComboBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_historyComboBoxActionPerformed
-
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    protected javax.swing.JButton appendToHistoryButton;
-    private javax.swing.JPanel bottomPanel;
-    protected javax.swing.JButton closeButton;
-    protected javax.swing.JButton executeButton;
-    protected javax.swing.JButton exportButton;
-    protected javax.swing.JButton helpButton;
-    protected javax.swing.JComboBox<String> historyComboBox;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    protected javax.swing.JComboBox<String> languageComboBox;
-    protected javax.swing.JTable outputTable;
-    protected javax.swing.JTextArea outputTextArea;
-    private javax.swing.JPanel resultPanel;
-    protected javax.swing.JTabbedPane resultTabbedPane;
-    private javax.swing.JPanel scriptPanel;
-    protected org.fife.ui.rsyntaxtextarea.RSyntaxTextArea scriptTextArea;
-    protected org.fife.ui.rtextarea.RTextScrollPane scriptTextScrollPane;
-    private javax.swing.JSplitPane splitPanel;
-    protected javax.swing.JTextField tableFilterTextField;
-    private javax.swing.JPanel tableResultPanel;
-    protected javax.swing.JPanel textualResultPanel;
-    private javax.swing.JPanel topPanel;
     // End of variables declaration//GEN-END:variables
 }

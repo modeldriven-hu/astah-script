@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin>
-   <extension point="com.change_vision.astah.ui.actionSets">
-      <actionSet
-            label="%action_set_label"
-            visible="true"
-            id="hu.modeldriven.astah-script.actionSet">
-         <menu
-               id="astah-script"
-               label="%menu_group"
-               path="tool/astah-script">
-         </menu>
-         <action
-			   label="%menu_label"
-               icon="icons/sample.gif"
-               class="hu.modeldriven.astah.script.ShowScriptEditorAction"
-               tooltip="%menu_tooltip"
-               menubarPath="tool/astah-script/"
-               id="astah-script">
-         </action>
-     </actionSet>
-   </extension>
+    <extension point="com.change_vision.astah.ui.actionSets">
+        <actionSet
+                label="%action_set_label"
+                visible="true"
+                id="hu.modeldriven.astah-script.actionSet">
+            <menu
+                    id="astah-script"
+                    label="%menu_group"
+                    path="tool/astah-script">
+            </menu>
+            <action
+                    label="%menu_label"
+                    icon="icons/sample.gif"
+                    class="hu.modeldriven.astah.script.ShowScriptEditorAction"
+                    tooltip="%menu_tooltip"
+                    menubarPath="tool/astah-script/"
+                    id="astah-script">
+            </action>
+        </actionSet>
+    </extension>
 </plugin>

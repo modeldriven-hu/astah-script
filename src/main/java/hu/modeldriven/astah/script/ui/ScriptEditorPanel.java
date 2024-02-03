@@ -17,7 +17,6 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
